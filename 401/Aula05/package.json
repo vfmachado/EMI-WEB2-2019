@@ -1,0 +1,15 @@
+{
+  "name": "aula05",
+  "version": "1.0.0",
+  "description": "Aula 05 - Iniciando a utilizacao do NPM",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "Vinicius Machado",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.4"
+  }
+}

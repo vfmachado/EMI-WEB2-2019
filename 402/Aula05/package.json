@@ -1,0 +1,21 @@
+{
+  "name": "aula05",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "Aula 05 - Introdução ao NPM e ao Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "keywords": [
+    "WebII",
+    "NPM",
+    "Express"
+  ],
+  "author": "Vinicius Machado",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10"
+  }
+}

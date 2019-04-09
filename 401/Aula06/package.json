@@ -1,0 +1,22 @@
+{
+  "name": "aula06",
+  "version": "1.0.0",
+  "description": "Utilizando o bodyparser e o expressjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "keywords": [
+    "NodeJS",
+    "ProgWebII",
+    "Express",
+    "Bodyparser"
+  ],
+  "author": "Vinicius Machado",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.11"
+  }
+}

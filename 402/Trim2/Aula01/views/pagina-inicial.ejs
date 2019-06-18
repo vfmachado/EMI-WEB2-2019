@@ -1,0 +1,25 @@
+
+<%- include('partes/inicio-head') %>
+    <style>
+        div {
+            border: 2px solid gray;
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('partes/menu-navegacao') %>
+    
+    <hr>
+    <h1>Página Inicial!!! Produtos</h1>
+
+    <% for (let i = 0; i < prods.length; i++) { %>
+            <div>
+                <h3><%= prods[i].nome %> </h3>
+                <h4><%= prods[i].valor %></h4>
+                <p><%= prods[i].descricao%></p>
+            </div>        
+    <% } %>
+
+</body>
+</html>

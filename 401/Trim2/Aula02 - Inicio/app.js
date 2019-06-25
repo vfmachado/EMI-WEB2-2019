@@ -1,16 +1,20 @@
 
-let produtos = [
-    {
-        nome: "GOL", 
-        preco: 39900.00, 
-        descricao: "Zero e Completo!"
-    },
-    {
-        nome: "UNO Mille", 
-        preco: 9900.00, 
-        descricao: "Esqueceu a chave? Tem escada em cima"
-    }
-];
+//ADICIONAR OS OUTROS ATRIBUTOS A CLASSE PRODUTO
+    //IMAGEM
+
+//MELHORAR O EJS PARA MOSTRAR OS OUTROS ATRIBUTOS
+    //TESTAR...
+
+//MELHORAR O FORMULARIO DE ADD PRODUTO PARA ADICIONAR
+//AS INFORMAÇÕES FALTANTES
+    //PRECO, DESCRICAO E A IMAGEM
+
+//MAIS UMA PAGINA PERMITINDO FILTRAR OS PRODUTOS POR FAIXA DE PRECO
+    //MAIS UM LINK NO MENU NAVEGAÇÃO - BUSCAR
+    //DOIS CAMPOS (VALOR MINIMO E MAXIMO)
+    //ALTERAR A CLASSE PRODUTO... PARA RETORNAR UM ARRAY
+    //SÓ COM OS PRODUTOS QUE SATISFAZEM O FILTRO
+
 
 const path = require('path');
 const express = require('express');
@@ -25,30 +29,15 @@ app.set('views', './views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+const rotasAdmin = require('./rotas/rotasAdmin');
+const rotasSistema = require('./rotas/rotasSistema');
 
-app.get('/', (req, res) => {
-    res.render('lista-produtos', 
-        {
-            pageTitle: "Página Inicial",
-            prods: produtos    
-        }
-    );
-});
+app.use('/admin', rotasAdmin);
+app.use(rotasSistema);
 
-app.get('/admin/add-product', (req, res) => {
-    res.render('add-produto', 
-        {
-            pageTitle: "Admin - Add Prod"
-            
-        }
-    );
-});
+//pagina inicial e 404 para rotasSistema
 
 
-app.get('*', (req, res) => {
-    res.statusCode = 404;
-    res.render('404', {pageTitle: "Erro 404"}); 
-});
 
 app.listen(3000);
 

@@ -1,0 +1,31 @@
+<%- include('partes/inicio-head') %>
+    <!-- um css...-->
+</head>
+<body>
+
+    <%- include('partes/menu-navegacao') %>
+
+    <hr>
+    <h1>Lista Produtos!!!</h1>
+
+    <% for (let i = 0; i < prods.length; i++) { %>
+        <div style="border: 2px solid gray">
+            <h2><%= prods[i].nome %></h2>
+            
+        </div>
+        
+    <% } %>
+
+    <hr>
+    <footer>
+        <h3>Fale Conosco</h3>
+        <ul>
+            <li>Facebook</li>
+            <li>Instagram</li>
+        </ul>
+
+        <h4>Desenvolvedor: Vinícius Machado</h4>
+
+    </footer>
+</body>
+</html>

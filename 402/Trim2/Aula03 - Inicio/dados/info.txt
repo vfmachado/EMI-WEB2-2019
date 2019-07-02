@@ -1,0 +1,1 @@
+[{"nome":"abc","preco":1000,"descricao":"Produto sem descricao"},{"nome":"teste","preco":1000,"descricao":"Produto sem descricao"},{"nome":"Pixel Art 128x128","preco":1000,"descricao":"Produto sem descricao"}]

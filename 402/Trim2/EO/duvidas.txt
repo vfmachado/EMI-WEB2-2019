@@ -1,0 +1,72 @@
+EXERCICO BÁSICO DE PROGRAMAÇÃO - COMENTAR TODAS AS LINHAS DE código
+
+1. Como eu sei se estou estruturando os códigos corretamente?
+
+    MVC - é um padrão adotado mundialmente... ha muito tempo.
+    Adaptaremos o nosso código a esse padrão
+
+    Para fazer isso certo... vamos separar nas 3 camadas (projeto arquitetônico do software)
+
+        Model - lógica relacionada aos dados. São as "classes" que tínhamos em Java.
+            Função de termos um Model: representar os dados do meu sistema
+
+        View - é o que o usuário vê
+
+        Controller - lógica do sistema
+
+    Hoje (09/07/2019), cada camada equivale a uma pasta.
+
+    https://www.brainvire.com/six-benefits-of-using-mvc-model-for-effective-web-application-development/
+
+
+
+2. Como fazer filtragem de produtos / significado disso
+
+    O que é um filtro?
+        Separando o que eu quero
+        ex: filtro de agua, eu descarto as impurezas e tenho agua pura
+        ex: filtro de alunos, por exemplo, para buscar apenas os alunos menores de idade
+            os alunos menores de idade são aqueles que satisfazem a condição de ter menos de 18 anos.
+            apenas um subgrupo do meu grupo vai passar nesta condição e se tornar o resultado do meu filtro.
+
+    Exemplo para nosso exercício:
+        produtos = [
+            Produto {nome: "A", preco: 1000},
+            Produto {nome: "B", preco: 2000},
+            Produto {nome: "C", preco: 3000},
+            Produto {nome: "D", preco: 4000},
+            Produto {nome: "E", preco: 5000},
+            Produto {nome: "F", preco: 6000},
+            Produto {nome: "G", preco: 7000},
+
+        ]
+
+        A classe Produto representa 1 produto
+        o Array contem varios produtos
+
+        Atenção!!!! O arquivo Produto.js não é a classe Produto
+        ele possui tbm a definição da classe Produto.
+        assim como ele possui tbm a definição da lista de produtos.
+
+        Filtro dos produtos 
+
+        queremos uma lista com os produtos que estejam entre os valores 2000, 4000
+
+        resultado = [B, C, D]
+
+        res = Produto.filtraPorPreco(2000, 4000);
+
+
+QUERY X PARAMS
+
+    req.query busca os valores passados na requisição get após o ?
+
+    req.params busca valores que serão utilizados pelo node como variaveis, por exemplo
+        /produto/123
+
+        no node teríamos
+
+            app.get('/produto/:id', (req, res) => {
+                //podemos acessar o id utilizando
+                let id = req.params.id;
+            });

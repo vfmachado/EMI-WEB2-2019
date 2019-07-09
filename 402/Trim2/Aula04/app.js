@@ -32,9 +32,29 @@ TEMA 03
     MODIFICAR O EJS DA LISTA-PRODUTOS PARA DETALHAR UMA PAGINA COM O ID DO PRODUTO
         /DETALHAR/1001
     
-    AJUSTAR A ROTA DE DETALHE E BUSCA PARA UMA ROTA DE PRODUTOS
+    AJUSTAR A ROTA DE DETALHE E BUSCA PARA UMA NOVA ROTA DE PRODUTOS (rotasProduto.js)
 
     AJUSTAR O DETALHAR PARA MOSTRAR TODOS OS DADOS DO PRODUTO
+    
+
+*/
+
+//TEMA AULA 04
+/*  
+    ATUALIZAR TODO SISTEMA PARA O PADRÃO MVC
+        - nao pode ter lógica no app.js
+        - nao pode ter lógica em nenhuma rota
+        - toda lógica no controller!!!
+
+    PERMITIR ATUALIZAR UM PRODUTO, INFORMANDO NOVO VALOR, IMAGEM, DESCRICAO E PRECO.
+
+    PERMITIR REMOVER UM PRODUTO
+
+    CRIAR UM MODEL PARA CARRINHO DE COMPRAS E UM CONTROLLER
+        ADD PRODUTOS
+        VER O CARRINHO
+        FINALIZAR COMPRA
+
     
 
 */
@@ -46,6 +66,9 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const Produto = require('./models/Produto');
+
+//ROTAS
+const adminRotas = require('./rotas/rotasAdmin');
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -64,26 +87,8 @@ app.get('/', (req, res) => {
     );
 });
 
-app.get('/admin/add-product', (req, res) => {
-    res.render('add-produto', 
-        {
-            pageTitle: "Admin - Add Prod"
-            
-        }
-    );
-});
+app.use('/admin', adminRotas);
 
-
-app.post('/admin/add-product', (req, res) => {
-
-    //add produto
-    let novoProduto = new Produto(req.body.title);
-    novoProduto.salvar();
-
-   // res.write("Produto adicionado " + req.body.title);
-   // res.end();
-   res.redirect('/');
-});
 
 //antes do 404
 //vou add outras rotas

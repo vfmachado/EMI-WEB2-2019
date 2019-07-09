@@ -1,0 +1,37 @@
+<%- include('partes/inicio-head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('partes/menu-navegacao.ejs') %>
+
+    <main>
+        <% if (prods.length > 0) { %>
+            <div class="grid">
+                <% for (let product of prods) { %>
+                    <article class="card product-item">
+                        <header class="card__header">
+                            <h1 class="product__title"><%= product.nome %></h1>
+                        </header>
+                        <div class="card__image">
+                            <img src="https://cdn.shopify.com/s/files/1/1559/1905/products/027084257373-7_704x288.jpg"
+                                alt="Mais um carro..">
+                        </div>
+                        <div class="card__content">
+                            <h2 class="product__price">R$ <%= product.preco %></h2>
+                            <p class="product__description"><%= product.descricao %></p>
+                        </div>
+                        <div class="card__actions">
+                            <a href="/detalhar/1">Detalhes</a>
+                            <button class="btn">Add to Cart</button>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
+        <% } else { %>
+            <h1>No Products Found!</h1>
+        <% } %>
+    </main>
+
+</body>
+</html>

@@ -29,6 +29,23 @@
     
 */
 
+//TEMA AULA 04
+/*  
+    ATUALIZAR TODO SISTEMA PARA O PADRÃO MVC
+
+    PERMITIR ATUALIZAR UM PRODUTO, INFORMANDO NOVO VALOR, IMAGEM, DESCRICAO E PRECO.
+
+    PERMITIR REMOVER UM PRODUTO
+
+    CRIAR UM MODEL PARA CARRINHO DE COMPRAS E UM CONTROLLER
+        ADD PRODUTOS
+        VER O CARRINHO
+        FINALIZAR COMPRA
+
+    
+
+*/
+
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');

@@ -1,0 +1,23 @@
+{
+  "name": "aulasql401",
+  "version": "1.0.0",
+  "description": "Aula com Node e SQL juntos =O",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "keywords": [
+    "SQL",
+    "NodeJS",
+    "Programação"
+  ],
+  "author": "Vinicius Machado",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "mysql2": "^1.6.5",
+    "nodemon": "^1.19.1"
+  }
+}

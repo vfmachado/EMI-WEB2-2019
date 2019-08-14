@@ -9,12 +9,12 @@
 
 /*
 ALTER USER 'root'@'localhost' 
-	IDENTIFIED WITH mysql_native_password BY 'admin';
+	IDENTIFIED WITH mysql_native_password BY 'ifrs';
 */
 
 console.log("OK... iniciando");
 
-
+const bodyparser = require('body-parser');
 
 const db = require('./database');
 
@@ -26,18 +26,10 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.get('/verRemedios', (req, res) => {
+app.use(bodyparser.urlencoded({ extended: false }));
 
-    db.execute("SELECT * FROM remedio")
-    .then(result =>{
-        console.log(result[0]);
-        
-        res.render('template', {prods: result[0]});
-        //res.write(JSON.stringify(result[0]));
-        //res.end();
-    })
-    .catch(err => {console.log(err)});
-})
+const rotasRemedio = require('./rotas/rotasRemedios');
+app.use('/teste/', rotasRemedio);
 
 app.listen(3000);
 

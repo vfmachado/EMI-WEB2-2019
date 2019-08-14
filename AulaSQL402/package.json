@@ -10,6 +10,8 @@
   "author": "Prof Vini",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
     "mysql2": "^1.6.5"
   }
 }

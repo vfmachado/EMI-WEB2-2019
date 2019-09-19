@@ -50,6 +50,7 @@ router.post('/addRemedio', (req, res) => {
 
 
 router.get('/verRemedio/:id', (req, res) => {
+    //para acessar a variavel ID da URL: req.params.id;
     //mostrar uma página só com o remédio do ID.
     //Caso não tenha remédio com o ID, mostre uma msg de erro
 });

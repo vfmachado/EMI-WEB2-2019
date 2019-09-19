@@ -17,8 +17,16 @@ exports.SalvarSerieNoBanco = (req, res) => {
 
     db.execute(query)
     .then(CERTO => {
-        res.write("salvei no banco...");
-        res.write(JSON.stringify(req.body));
+        res.write(`
+        <html>
+        <body>
+            <h1>Salvei!</h1>
+            <p>${JSON.stringify(req.body)}</p>
+        </body>
+        </html>
+        
+        `);
+        
         res.end();
     })
     .catch(ERRADO => {

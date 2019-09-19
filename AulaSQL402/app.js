@@ -19,7 +19,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const rotaParaSeries = require('./rotas/rotaSeries');
@@ -40,7 +39,9 @@ app.get('/', (chegou, vaisair) => {
 
 });
 
-app.listen(3000);
+app.listen(3000, () => {console.log("Escutando na porta 3000.")});
+console.log("Depois do listen...");
+
 /*
 
 

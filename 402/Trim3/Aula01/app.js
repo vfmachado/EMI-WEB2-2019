@@ -4,12 +4,25 @@ Próximos Tópicos:
     1. Cookies
     2. Sessões
     3. Upload e Download de arquivos
-        aula para ver o início dos trabalho
+        aula para ver o início dos trabalho - PRÉVIA DE TRABALHO
+        09/OUTUBRO
+            PRÉVIA DA MODELAGEM DE BANCO
+            ESBOÇO DA PARTE DO FRONT-END
+
     4. Envio de emails
     5 e 6. Acesso a APIs - back (Node) e front-end (AJAX)
         aula para ver o meio dos trabalhos
+        06/NOVEMBRO
+            TODA PARTE DE BANCO QUE FUNCIONAR
+            FRONT-END TEM QUE ESTAR PERTO DO FINAL
+            JÁ DEVE ESTAR FUNCIONANDO O SISTEMA DE LOGIN CORRETAMENTE.
+
     ** Pagamento!!
         entrega do trabalho
+    
+        27/NOVEMBRO
+            SISTEMA COMPLETO PARA A ENTREGA.
+
 
 Trabalho do trimestre
     Parceria com a professora Janaína - Design Web.
@@ -68,6 +81,7 @@ COOKIES
 const express = require('express');
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser');
+const session = require('express-session');
 
 const app = express();
 
@@ -77,6 +91,20 @@ app.set('views', './views');
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(cookieparser());
 
+app.use(session({
+    secret: 'EU CRIO UMA FRASE GIGANTE QUE NINGUEM VAI DESCOBRIR! IAUHAIUHIAHU 12351R1!%!#$!@@!#',
+    resave: false,
+    saveUninitialized: false
+}));
+
+/*
+    RESAVE = FORÇA A SESSÃO A SER SALVA NOVAMENTE MESMO QUE ELA NÃO TENHA SIDO MODIFICADA.
+			DEVE SER VERDADEIRO QUANDO O ARMAZENAMENTO DA SESSÃO SETA UMA DATA DE EXPIRAÇÃO.
+			NORMALMENTE É UTILIZADO FALSO
+    SAVEUNINITIALIZED = FORÇA A SESSÃO QUE É 'NÃO INICIALIZADA' A SER GUARDADA NO ARMAZENAMENTO.
+			UMA SESSÃO É 'NÃO INICIALIZADA' QUANDO É NOVA MAS NÃO MODIFICADA. ESCOLHEI A OPÇÃO FALSE É ÚTIL PARA SESSÕES DE LOGIN, REDUZINDO O CONSUMO DO SERVIDOR.
+		
+*/
 
 app.get('/', (req, res) => {
     
@@ -84,9 +112,22 @@ app.get('/', (req, res) => {
 
     //buscar cookie
     // req.cookies.email; para que isso funcione, precisamos setar o cookie-parser
-
+/*
     if (req.cookies.email) {
         res.write(req.cookies.email);
+    }
+*/
+    console.log(req.session);
+
+    if (req.session.logou == true) {
+        res.write("O usuario " + req.session.email + " está logado" )
+
+        if (req.session.isAdmin) {
+            res.write("\nVC tem todas as permissoes!");
+        }
+
+    } else {
+        res.write("Visitante!!!");
     }
 
     res.end();
@@ -99,9 +140,18 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     //email = req.body.email;
 
-    res.setHeader('Set-Cookie', 'email=' + req.body.email);
+    //res.setHeader('Set-Cookie', 'email=' + req.body.email);
     //res.cookie('email', req.body.email);
-    
+    //res.cookie('logou', "true");
+
+    req.session.email = req.body.email;
+    req.session.logou = true;
+
+    if (req.body.email == "admin@admin") {
+        req.session.isAdmin = true;
+    }
+
+
     res.write("Recebido: " + req.body.email);
     res.end();
 });

@@ -4,12 +4,25 @@ Próximos Tópicos:
     1. Cookies
     2. Sessões
     3. Upload e Download de arquivos
-        aula para ver o início dos trabalho
+        aula para ver o início dos trabalho - PRÉVIA DE TRABALHO
+        09/OUTUBRO
+            PRÉVIA DA MODELAGEM DE BANCO
+            ESBOÇO DA PARTE DO FRONT-END
+
     4. Envio de emails
     5 e 6. Acesso a APIs - back (Node) e front-end (AJAX)
         aula para ver o meio dos trabalhos
+        06/NOVEMBRO
+            TODA PARTE DE BANCO QUE FUNCIONAR
+            FRONT-END TEM QUE ESTAR PERTO DO FINAL
+            JÁ DEVE ESTAR FUNCIONANDO O SISTEMA DE LOGIN CORRETAMENTE.
+
     ** Pagamento!!
         entrega do trabalho
+    
+        27/NOVEMBRO
+            SISTEMA COMPLETO PARA A ENTREGA.
+
 
 Trabalho do trimestre
     Parceria com a professora Janaína - Design Web.
@@ -66,8 +79,29 @@ COOKIES
 
 const express = require('express');
 const bodyparser = require('body-parser');
+const cookieparser = require('cookie-parser');
+
+const session = require('express-session');
 
 const app = express();
+
+app.use(
+    session(
+        {
+            secret: 'CHAVE LONGA QUE É UTILIZADA PARA CRIPTOGRAFIA 12364512534SAUHAIUHSIUH213551092UWICONF31128403GHIFJN13498', 
+            resave: false, 
+            saveUninitialized: false
+        }
+    ));
+/*
+    RESAVE = FORÇA A SESSÃO A SER SALVA NOVAMENTE MESMO QUE ELA NÃO TENHA SIDO MODIFICADA.
+			DEVE SER VERDADEIRO QUANDO O ARMAZENAMENTO DA SESSÃO SETA UMA DATA DE EXPIRAÇÃO.
+            NORMALMENTE É UTILIZADO FALSO
+            
+
+     SAVEUNINITIALIZED = FORÇA A SESSÃO QUE É 'NÃO INICIALIZADA' A SER GUARDADA NO ARMAZENAMENTO.
+			UMA SESSÃO É 'NÃO INICIALIZADA' QUANDO É NOVA MAS NÃO MODIFICADA. ESCOLHER A OPÇÃO FALSE É ÚTIL PARA SESSÕES DE LOGIN, REDUZINDO O CONSUMO DO SERVIDOR.       
+*/
 
 //setar o body parser e a view engine
 app.set('view engine', 'ejs');
@@ -75,16 +109,26 @@ app.set('views', './views');
 
 app.use(bodyparser.urlencoded({ extended: false }));
 
+//cookie-parser é um middleware!
+app.use(cookieparser());
+
 //proximo passo - rota principal
 app.get('/', (req, res) => {
     res.write("OK!");
-/*
-    if (logou) {
+
+   // res.write("Logado: " + req.cookies.logou);
+
+   console.log(req.session);
+
+    //if (req.cookies.logou == "true") {
+    if (req.session.estaLogado == true) {
         res.write("\nUsuario Logado: ")
+        res.write("\n" + req.session.email);
+        res.write("\n" + req.session.quandoLogou);
     } else {
         res.write("\nBem vindo visitante")
     }
-*/
+
     res.end();
 });
 
@@ -95,8 +139,16 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
     
     //res.setHeader('Set-Cookie', "logou=true; email=" + req.body.email);
-    res.cookie('logou', true);
-    res.cookie('email', req.body.email);
+    //res.cookie('logou', true);
+    //res.cookie('email', req.body.email);
+
+    console.log("Senha: " + req.body.senha);
+    //encriptar ela.
+
+    req.session.estaLogado = true;
+    req.session.email = req.body.email;
+    req.session.quandoLogou = new Date();
+    //req.session.ehAdmin = true
 
     res.write("Recebido: " + req.body.email);
        

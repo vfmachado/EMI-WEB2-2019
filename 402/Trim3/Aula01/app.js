@@ -5,7 +5,7 @@ Próximos Tópicos:
     2. Sessões
     3. Upload e Download de arquivos
         aula para ver o início dos trabalho - PRÉVIA DE TRABALHO
-        09/OUTUBRO
+        16/OUTUBRO
             PRÉVIA DA MODELAGEM DE BANCO
             ESBOÇO DA PARTE DO FRONT-END
 
@@ -78,10 +78,24 @@ COOKIES
 
 */
 
+const users = [
+    {
+      email: "vinicius.machado@osorio.ifrs.edu.br",
+      senha: "$2a$12$cltTin0pl3asTkpZtLlFbu54jYngs8auFypIdxwCqMRcvNiy2AwCq"
+    },
+    {
+        email: "admin@admin",
+        senha: "$2a$12$RO9MCyFOBb0UERRvPORVseGcrEoYCWW7AF0P6UBrF/OPTVutQ887G",
+        admin : true
+    }
+];
+
 const express = require('express');
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser');
 const session = require('express-session');
+
+const bcrypt = require('bcryptjs');
 
 const app = express();
 
@@ -144,16 +158,67 @@ app.post('/login', (req, res) => {
     //res.cookie('email', req.body.email);
     //res.cookie('logou', "true");
 
+    /*
     req.session.email = req.body.email;
     req.session.logou = true;
 
-    if (req.body.email == "admin@admin") {
-        req.session.isAdmin = true;
+    let senha = req.body.senha;
+    console.log("Senha informada: " + senha);
+
+    bcrypt.hash(senha, 12)
+        .then(senhaCriptografada => {
+
+            console.log("A nova senha será: " + senhaCriptografada);
+
+            if (senha == "admin") {
+                console.log("Passei aqui...");
+                req.session.isAdmin = true;
+            }
+            res.write("Recebido: " + req.body.email);
+            res.end();
+        }
+        );
+    */
+
+    let email = req.body.email;
+    //let temUser = false;
+    for (let u of users) {
+        if (u.email == email) {
+            //agora tenho que verificar a senha
+            //res.write("Tem esse user");
+            //res.end();
+            //return;
+
+            //verificar se a senha que o usuario informou é a mesma criptografada
+            bcrypt.compare(req.body.senha, u.senha)
+                .then(deuMatch => {
+
+                    if (deuMatch) {
+                        if (u.admin) {
+                            req.session.isAdmin = true;
+                        }
+
+                        req.session.logou = true;
+                        req.session.quandoLogou = new Date();
+                        req.session.email = u.email;
+
+                        res.redirect('/');
+
+                    } else {
+                        res.write("Senha incorreta!!!");
+                        res.end();
+                    }
+
+                })
+                .catch(erro => {
+                    console.log(erro);
+                })
+
+
+        }
     }
-
-
-    res.write("Recebido: " + req.body.email);
-    res.end();
+    //RESOLVER A QUESTAO DO SINCRONISMO.
+    //res.redirect('/login');
 });
 
 app.listen(3000, () => {

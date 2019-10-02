@@ -5,7 +5,7 @@ Próximos Tópicos:
     2. Sessões
     3. Upload e Download de arquivos
         aula para ver o início dos trabalho - PRÉVIA DE TRABALHO
-        09/OUTUBRO
+        16/OUTUBRO
             PRÉVIA DA MODELAGEM DE BANCO
             ESBOÇO DA PARTE DO FRONT-END
 
@@ -81,6 +81,8 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser');
 
+const bcrypt = require('bcryptjs');
+
 const session = require('express-session');
 
 const app = express();
@@ -143,16 +145,36 @@ app.post('/login', (req, res) => {
     //res.cookie('email', req.body.email);
 
     console.log("Senha: " + req.body.senha);
+
+    //TEMA - ALINHAR AS PROMISES!
+    bcrypt.compare(req.body.senha, "$2a$12$PMNdV6pTv3CA9eJnYqo1Ce0U5hmbE/iBrqlhCXRY93r2GajbWdW8y")
+        .then(combinouSenhas => {
+            if (combinouSenhas) {
+                console.log("Deve ser admin!!!");
+                req.session.ehAdmin = true;
+            }
+        })
+        .catch(erro => {
+            console.log(erro);
+        })
+
+    bcrypt.hash(req.body.senha, 12)
+        .then(novaSenha => {
+            console.log("A senha nova eh: " + novaSenha);
+
+            req.session.estaLogado = true;
+            req.session.email = req.body.email;
+            req.session.quandoLogou = new Date();
+            //req.session.ehAdmin = true
+        
+            res.write("Recebido: " + req.body.email);
+               
+            res.end();
+
+        });
     //encriptar ela.
 
-    req.session.estaLogado = true;
-    req.session.email = req.body.email;
-    req.session.quandoLogou = new Date();
-    //req.session.ehAdmin = true
-
-    res.write("Recebido: " + req.body.email);
-       
-    res.end();
+   
 });
 
 app.get('/outra', (req, res) => {

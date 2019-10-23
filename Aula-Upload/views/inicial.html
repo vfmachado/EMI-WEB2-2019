@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Enviando arquivos</title>
+</head>
+<body>
+   
+ <br>
+ <!--  Um único arquivo -->
+<form action="/enviaUm" enctype="multipart/form-data" method="POST"> 
+   <input type="file" name="meuArquivo" />
+   <input type="submit" value="Upload"/>
+</form>
+ 
+<br><br>
+<!-- Vários arquivos -->
+ 
+<form action="/enviaVarios"  enctype="multipart/form-data" method="POST">
+  Múltiplos arquivos: <input type="file" name="variosArquivos" multiple>
+  <input type="submit" value="Upload"/>
+</form>
+<br><br>
+  <!--   Fotos  -->
+ 
+<form action="/enviaUm" enctype="multipart/form-data" method="POST"> 
+    Apenas imagem: 
+    <input type="file" name="meuArquivo" accept="image/*" />
+  <input type="submit" value="Upload"/>
+</form>
+ 
+<br>
+
+ <a href="/download/variosArquivos-1571234776688.jpg">BAIXAR ESTA IMAGEM</a>
+    
+</body>
+</html>

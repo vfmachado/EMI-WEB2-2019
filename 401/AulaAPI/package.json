@@ -1,0 +1,19 @@
+{
+  "name": "aulaapi",
+  "version": "1.0.0",
+  "description": "Acesso a API Externa",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "API",
+    "NodeJS",
+    "Request"
+  ],
+  "author": "Vinicius Machado",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}

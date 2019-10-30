@@ -205,8 +205,9 @@ app.post('/login', (req, res) => {
                         res.redirect('/');
 
                     } else {
-                        res.write("Senha incorreta!!!");
-                        res.end();
+                        //res.write("Senha incorreta!!!");
+                        //res.end();
+                        res.render('login-form', {erro : "Senha incorreta", email : email})
                     }
 
                 })

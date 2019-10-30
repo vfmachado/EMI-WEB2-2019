@@ -8,18 +8,12 @@
 </head>
 <body>
     
-<% if (locals.erro)  { %>
-    <h2>
-        <%= erro %>
-    </h2>
-<% } %>
-
-    <form action="/login" method="POST">
-        <input type="email" name="email" value= "<% if (locals.email) { %> <%= email %> <% } %>">
+    <form action="/cadastrar" method="POST">
+        <input type="email" name="email">
         <br>
         <input type="password" name="senha">
         <br>
-        <input type="submit" value="Vai!!">
+        <input type="submit" value="Cadastra!!">
     </form>
 
 </body>
